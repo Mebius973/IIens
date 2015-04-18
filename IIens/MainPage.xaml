@@ -8,7 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Pivot Title="IIens" Margin="0,0,0,-27">
+        <Pivot.HeaderTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding}" FontSize="42" Margin="0,0,10,0"/>
+            </DataTemplate>
+        </Pivot.HeaderTemplate>
 
-    </Grid>
+        <PivotItem Header="News">
+			<Grid/>
+		</PivotItem>
+		<PivotItem Header="Emplois du temps">
+			<Grid/>
+		</PivotItem>
+		<PivotItem Header="Twitter">
+			<Grid/>
+		</PivotItem>
+	</Pivot>
 </Page>
