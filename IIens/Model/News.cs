@@ -8,6 +8,6 @@ namespace IIens.Model
         public String title { get; set; }
         public String description { get; set; }
         public String author { get; set; }
-        public DateTime publicationDate { get; set; }
+        public String publicationDate { get; set; }
     }
 }
