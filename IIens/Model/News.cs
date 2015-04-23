@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace IIens.Model
 {
-    class News
+    class News : INotifyPropertyChanged
     {
         public String title { get; set; }
         public String description { get; set; }
