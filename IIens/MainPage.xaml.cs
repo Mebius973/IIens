@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using IIens.ViewModel;
+
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -22,9 +25,11 @@ namespace IIens
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private NewsViewModel newsViewModel;
         public MainPage()
         {
             this.InitializeComponent();
+            newsViewModel = new NewsViewModel();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
@@ -34,8 +39,9 @@ namespace IIens
         /// </summary>
         /// <param name="e">Données d’événement décrivant la manière dont l’utilisateur a accédé à cette page.
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            await newsViewModel.webReq();
             // TODO: préparer la page pour affichage ici.
 
             // TODO: si votre application comporte plusieurs pages, assurez-vous que vous
@@ -43,6 +49,13 @@ namespace IIens
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed.
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
+            NewsViewOnPage.DataContext = newsViewModel.News;
+            System.Diagnostics.Debug.WriteLine(NewsViewOnPage.DataContext);
+        }
+
+        private void NewsViewOnPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
