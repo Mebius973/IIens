@@ -39,17 +39,13 @@ namespace IIens.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 System.Diagnostics.Debug.WriteLine(response);
-                //var dialog = new MessageDialog(response.Content.ToString());
-                //await dialog.ShowAsync();
                     var data = JsonConvert.DeserializeObject<News[]>(response.Content.ToString());
                     System.Diagnostics.Debug.WriteLine(response.Content);
                     foreach (News news in data)
                     {
                         result.Add(news);
-                        System.Diagnostics.Debug.WriteLine(news.titre);
                     }
                 News = result;
-                System.Diagnostics.Debug.WriteLine(News.Count);
             }
         }
     }

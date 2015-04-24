@@ -18,9 +18,7 @@
         </Pivot.HeaderTemplate>
 
         <PivotItem Header="News">
-            <Grid>
-                <views:NewsView x:Name="NewsViewOnPage" Loaded="NewsViewOnPage_Loaded"/>
-            </Grid>
+            <views:NewsView x:Name="NewsViewOnPage" Loaded="NewsViewOnPage_Loaded"/>
         </PivotItem>
         <PivotItem Header="Emplois du temps">
             <Grid/>

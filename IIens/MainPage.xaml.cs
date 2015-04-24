@@ -50,12 +50,10 @@ namespace IIens
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
             NewsViewOnPage.DataContext = newsViewModel.News;
-            System.Diagnostics.Debug.WriteLine(NewsViewOnPage.DataContext);
         }
 
         private void NewsViewOnPage_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
