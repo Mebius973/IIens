@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Collections.ObjectModel;
-using Windows.Storage ;
-using Newtonsoft.Json;
-using IIens.Model;
-using System.Windows.Input;
-using Windows.Web.Http;
-using Windows.UI.Popups;
-using Windows.Web.Http.Filters;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.Security.Cryptography.Certificates;
+using Windows.Web.Http;
+using Windows.Web.Http.Filters;
+using IIens.Model;
+using Newtonsoft.Json;
 
 namespace IIens.ViewModel
 {
@@ -21,27 +15,26 @@ namespace IIens.ViewModel
     {
         public ObservableCollection<News> News { get; set; }
         
-        public async Task webReq()
+        public async Task WebReq()
         {
-            ObservableCollection<News> result = new ObservableCollection<News>();
+            var result = new ObservableCollection<News>();
 
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var filter = new HttpBaseProtocolFilter();
             filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.IncompleteChain);
             filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Expired);
             filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
             filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
-            HttpClient clientOb = new Windows.Web.Http.HttpClient(filter);
-            Uri connectionUri = new Uri("https://magadeva.iiens.net/IIEns/apiie.php");
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
-            pairs.Add("type", "news");
-            HttpFormUrlEncodedContent formContent = new HttpFormUrlEncodedContent(pairs);
-            HttpResponseMessage response = await clientOb.PostAsync(connectionUri, formContent);
+            var clientOb = new HttpClient(filter);
+            var connectionUri = new Uri("https://magadeva.iiens.net/IIEns/apiie.php");
+            var pairs = new Dictionary<string, string> {{"type", "news"}};
+            var formContent = new HttpFormUrlEncodedContent(pairs);
+            var response = await clientOb.PostAsync(connectionUri, formContent);
             if (response.IsSuccessStatusCode)
             {
-                System.Diagnostics.Debug.WriteLine(response);
+                Debug.WriteLine(response);
                     var data = JsonConvert.DeserializeObject<News[]>(response.Content.ToString());
-                    System.Diagnostics.Debug.WriteLine(response.Content);
-                    foreach (News news in data)
+                    Debug.WriteLine(response.Content);
+                    foreach (var news in data)
                     {
                         result.Add(news);
                     }

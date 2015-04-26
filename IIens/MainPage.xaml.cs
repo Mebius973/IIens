@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Newtonsoft.Json;
 using IIens.ViewModel;
-
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -25,13 +12,13 @@ namespace IIens
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private NewsViewModel newsViewModel;
+        private readonly NewsViewModel _newsViewModel;
         public MainPage()
         {
-            this.InitializeComponent();
-            newsViewModel = new NewsViewModel();
+            InitializeComponent();
+            _newsViewModel = new NewsViewModel();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         /// <summary>
@@ -41,7 +28,7 @@ namespace IIens
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await newsViewModel.webReq();
+            await _newsViewModel.WebReq();
             // TODO: préparer la page pour affichage ici.
 
             // TODO: si votre application comporte plusieurs pages, assurez-vous que vous
@@ -49,7 +36,7 @@ namespace IIens
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed.
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
-            NewsViewOnPage.DataContext = newsViewModel.News;
+            NewsViewOnPage.DataContext = _newsViewModel.News;
         }
 
         private void NewsViewOnPage_Loaded(object sender, RoutedEventArgs e)

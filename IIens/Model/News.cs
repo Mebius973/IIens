@@ -5,18 +5,26 @@ namespace IIens.Model
 {
     class News : INotifyPropertyChanged
     {
-        public String titre { get; set; }
-        public String contenu { get; set; }
-        public String par { get; set; }
-        public String calDate { get; set; }
+        public String Titre { get; set; }
+        public String Contenu { get; set; }
+        public String Par { get; set; }
+        public String CalDate { get; set; }
+
+        public String SubTitle
+        {
+            get
+            {
+                return "Publié le " + CalDate + " par " + Par;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
