@@ -1,12 +1,29 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace IIens.Model
 {
     class News : INotifyPropertyChanged
     {
         public String Titre { get; set; }
-        public String Contenu { get; set; }
+
+        private String _contenu;
+        public String Contenu
+        {
+            get
+            {
+                return _contenu;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                _contenu = Regex.Replace(value, "(:[a-zA-Z]+:|<br\\s*\\/?>)", "");
+            }
+        }
         public String Par { get; set; }
         public String CalDate { get; set; }
 
