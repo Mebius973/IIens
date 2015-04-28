@@ -25,7 +25,22 @@ namespace IIens.Model
             }
         }
         public String Par { get; set; }
-        public String Poste { get; set; }
+        private String _poste;
+        public String Poste { 
+            get 
+            {
+                return _poste;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                string [] split = value.Split(new Char [] {'-'});
+                    _poste = split[2] + "/" + split [1] + "/" + split[0];
+            } 
+        }
 
         public String SubTitle
         {
