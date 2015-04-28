@@ -25,13 +25,13 @@ namespace IIens.Model
             }
         }
         public String Par { get; set; }
-        public String CalDate { get; set; }
+        public String Poste { get; set; }
 
         public String SubTitle
         {
             get
             {
-                return "Publié le " + CalDate + " par " + Par;
+                return "Publié le " + Poste + " par " + Par;
             }
         }
 
